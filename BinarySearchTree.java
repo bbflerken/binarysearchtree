@@ -1,4 +1,3 @@
-
 public class BinarySearchTree<AnyType extends Comparable<? super AnyType>> {
 	
 	protected BinaryNode<AnyType> root; //The tree root.
@@ -37,7 +36,9 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>> {
 	{return findKth(k, root).element;}
 	
 	public void print()
-	{return print(root);}
+	{
+		
+	}
 	
 	private BinaryNode<AnyType> find(AnyType x, BinaryNode<AnyType> t)
 	{
@@ -80,7 +81,6 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>> {
 			t.right = insert(x, t.right);
 		else
 			throw new DuplicateItemException(x.toString() );
-		
 		return t;
 	}
 	
@@ -131,9 +131,6 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>> {
 		
 	}
 	
-	protected BinaryNode<AnyType> print(BinaryNode<AnyType> t)//To print Tree
-	{
-		
-	}
 }
 	
+
