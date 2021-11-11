@@ -1,7 +1,15 @@
+
+import java.util.Stack;
 public class BinarySearchTree<AnyType extends Comparable<? super AnyType>> {
 	
 	protected BinaryNode<AnyType> root; //The tree root.
 	
+	private static class BinaryNodeWithSize<AnyType> extends BinaryNode<AnyType>
+	{
+		BinaryNodeWithSize(AnyType x)
+		{super (x); size =0;}
+		int size;
+	}
 	public BinarySearchTree()//Construct the tree.
 	{ root = null;}
 	
@@ -37,6 +45,7 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>> {
 	
 	public void print()
 	{
+		int h = height(root);
 		
 	}
 	
@@ -58,8 +67,7 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>> {
 	private BinaryNode<AnyType> findMin(BinaryNode<AnyType> t)//Internal method to find the smallest item in a subtree.
 	{
 		if(t!=null)
-			while(t.left != null)
-				t =t.left;	
+			return find(root);
 		return t;
 	}
 	
@@ -117,20 +125,25 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>> {
 	
 	protected BinaryNode<AnyType> findKth (int k, BinaryNode<AnyType> t)
 	{
-		int count =0;
+		int count = 0;
 		
 		if(t == null)
 			throw new IllegalArgumentException();	
-		if(t.left != null)
-			return findKth(k, t.left);
-		count ++;
-		if ( count == k)
+		int leftSize =(t.left != null)?((BinaryNodeWithSize<AnyType>)t.left).size : 0;
+		
+		if(k <= leftSize)
+		{ 
+			while(t.left != null)
+			{
+				count ++;
+			}
+			return t.left;
+		}
+		if (k == leftSize + 1)
 			return root;
 
-		return findKth(k, root.right);
+		return findKth(k, t.right);
 		
 	}
 	
 }
-	
-
