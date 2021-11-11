@@ -16,7 +16,7 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>> {
 	{root = removeMin(root);}
 
 	public AnyType findMin() //Find the smallest item in the tree.
-	{return elementAt(fidnMin(root));}
+	{return elementAt(findMin(root));}
 	
 	public AnyType findMax()//Find the largest item in the tree.
 	{return elementAt (findMax(root));}
@@ -32,6 +32,12 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>> {
 	
 	private AnyType elementAt(BinaryNode<AnyType> t)
 	{ return t == null ? null :t.element; }
+	
+	public AnyType findKth(int k)
+	{return findKth(k, root).element;}
+	
+	public void print()
+	{return print(root);}
 	
 	private BinaryNode<AnyType> find(AnyType x, BinaryNode<AnyType> t)
 	{
@@ -65,15 +71,16 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>> {
 	}
 	
 	private BinaryNode<AnyType> insert(AnyType x, BinaryNode<AnyType> t)//Internal method to insert into a subtree.
-	{
-		if(t==null)
+	{	
+		if(t == null)
 			t = new BinaryNode<AnyType>(x);
-		else if(x.compareTo(t.element) < 0)
-			t.left=insert(x,t.left);
-		else if(x.compareTo(t.element)>0)
+		else if( x.compareTo(t.element)< 0)
+			t.left = insert(x, t.left);
+		else if(x.compareTo(t.element)> 0)
 			t.right = insert(x, t.right);
 		else
 			throw new DuplicateItemException(x.toString() );
+		
 		return t;
 	}
 	
@@ -107,9 +114,26 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>> {
 			t=(t.left != null) ? t.left : t.right;
 		return t;
 	}
-	 public void print()//To print Tree
-	 {
-		 
-	 }
+	
+	protected BinaryNode<AnyType> findKth (int k, BinaryNode<AnyType> t)
+	{
+		int count =0;
+		
+		if(t == null)
+			throw new IllegalArgumentException();	
+		if(t.left != null)
+			return findKth(k, t.left);
+		count ++;
+		if ( count == k)
+			return root;
+
+		return findKth(k, root.right);
+		
+	}
+	
+	protected BinaryNode<AnyType> print(BinaryNode<AnyType> t)//To print Tree
+	{
+		
+	}
 }
 	
