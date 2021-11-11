@@ -1,5 +1,5 @@
 
-public class BinaryNode<Anytype> {
+public class BinaryNode<AnyType> {
 	
 	BinaryNode(AnyType theElement)//Constructor
 	{
@@ -8,7 +8,7 @@ public class BinaryNode<Anytype> {
 	}
 	
 	AnyType element; //The data in the node
-	BinaryNode<Anytype> left; //Left child
-	BinaryNode<Anytype> right;//Right child
+	BinaryNode<AnyType> left; //Left child
+	BinaryNode<AnyType> right;//Right child
 	
 }
